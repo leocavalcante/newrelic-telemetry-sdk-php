@@ -21,11 +21,9 @@ final class Curl implements AdapterInterface
             CURLOPT_HTTPHEADER => [
                 'Content-Type: application/json',
                 "Api-Key: {$this->apiKey}",
+                'Content-Encoding: GZIP',
             ],
-            CURLOPT_POSTFIELDS => json_encode(
-                $data,
-                JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE
-            ),
+            CURLOPT_POSTFIELDS => gzencode(json_encode($data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)),
         ];
 
         curl_setopt_array($ch, $opts);
