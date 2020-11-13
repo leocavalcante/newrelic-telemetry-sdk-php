@@ -2,6 +2,13 @@
 
 **Unofficial** PHP library for sending telemetry data to New Relic.
 
+| Status | API | Description |
+| --- | --- | --- |
+| ✅ | Trace API | Used to send [distributed tracing](https://docs.newrelic.com/docs/understand-dependencies/distributed-tracing/get-started/introduction-distributed-tracing#) data to New Relic (New Relic's format). |
+| ✅ | Metric API | Used to send [metric data](https://docs.newrelic.com/docs/using-new-relic/data/understand-data/new-relic-data-types#dimensional-metrics) to New Relic. |
+| ✅ | Event API | Is one way to report [custom events](https://docs.newrelic.com/docs/insights/insights-data-sources/custom-data/report-custom-event-data) to New Relic. |
+| - | Log API | **Not planned.** |
+
 - ⚠️ Heavily under development, but open-sourced seeking for contributions.
 - It **is not** an agent wrapper, it calls the New Relic [Ingest APIs](https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data/ingest-apis).
 
