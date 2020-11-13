@@ -10,14 +10,13 @@ abstract class APIResponse implements APIResponseInterface
     protected array $payload;
     protected ?string $id;
     /** @var array<string> */
-    protected array $messages;
+    protected array $messages = [];
 
     protected function __construct(int $code, array $payload)
     {
         $this->code = $code;
         $this->payload = $payload;
         $this->id = null;
-        $this->messages = [];
     }
 
     public function getMessage(): string
