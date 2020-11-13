@@ -9,14 +9,24 @@ abstract class Metric implements DataTypeInterface
     private string $name;
     /** @var int|float|SummaryValue|null */
     private $value;
+    /** @var array<string|int|float> */
     private array $attrs = [];
 
+    /**
+     * @param string $name
+     * @param int|float|SummaryValue|null $value
+     * @return static
+     */
     public static function create(string $name, $value = null): self
     {
         return new static($name, $value);
     }
 
-    public function __construct(string $name, $value = null)
+    /**
+     * @param string $name
+     * @param int|float|SummaryValue|null $value
+     */
+    public final function __construct(string $name, $value = null)
     {
         $this->name = $name;
         $this->value = $value;
@@ -32,12 +42,21 @@ abstract class Metric implements DataTypeInterface
         return $this;
     }
 
+    /**
+     * @param array<string|int|float> $attributes
+     * @return $this
+     */
     public function setAttributes(array $attributes): self
     {
         $this->attrs = $attributes;
         return $this;
     }
 
+    /**
+     * @param string $name
+     * @param string|int|float $value
+     * @return $this
+     */
     public function addAttribute(string $name, $value): self
     {
         $this->attrs[$name] = $value;

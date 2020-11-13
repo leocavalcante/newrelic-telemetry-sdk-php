@@ -19,7 +19,13 @@ final class PostResult
             return [];
         }
 
-        return json_decode($this->data, true);
+        $payload = json_decode($this->data, true);
+
+        if (!is_array($payload)) {
+            return [];
+        }
+
+        return $payload;
     }
 
     public function getCode(): int

@@ -27,6 +27,7 @@ final class Curl implements AdapterInterface
 
         curl_setopt_array($ch, $opts);
 
+        /** @var string|false $data */
         $data = curl_exec($ch);
         $code = (int)curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
         $error = curl_error($ch) ?: 'Unknown error';

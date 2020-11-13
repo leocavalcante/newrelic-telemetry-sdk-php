@@ -22,10 +22,19 @@ final class APIResponse extends AbstractResponse
         '5xx' => 'There was a server error (please retry).',
     ];
 
+    /**
+     * @param int $code
+     * @param array $payload
+     * @return static
+     */
     public static function create(int $code, array $payload): self
     {
         $response = new self($code, $payload);
-        $response->id = $payload['requestId'] ?? null;
+
+        if (array_key_exists('requestId', $payload)) {
+            $response->id = (string)$payload['requestId'];
+        }
+
         return $response;
     }
 }

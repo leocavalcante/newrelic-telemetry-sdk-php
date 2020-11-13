@@ -17,10 +17,19 @@ final class APIResponse extends AbstractResponse
         '5xx' => 'Service temporarily unavailable: Retry request',
     ];
 
+    /**
+     * @param int $code
+     * @param array $payload
+     * @return APIResponseInterface
+     */
     public static function create(int $code, array $payload): APIResponseInterface
     {
         $response = new self($code, $payload);
-        $response->id = $payload['uuid'] ?? null;
+
+        if (array_key_exists('uuid', $payload)) {
+            $response->id = (string)$payload['uuid'];
+        }
+
         return $response;
     }
 }
