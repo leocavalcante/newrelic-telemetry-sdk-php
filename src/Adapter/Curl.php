@@ -2,6 +2,8 @@
 
 namespace NewRelic\Adapter;
 
+use Ramsey\Uuid\Uuid;
+
 final class Curl implements AdapterInterface
 {
     private string $apiKey;
@@ -14,6 +16,8 @@ final class Curl implements AdapterInterface
     public function post(string $endpoint, array $data): PostResult
     {
         $ch = curl_init();
+        $request_id = Uuid::uuid4()->toString();
+
         $opts = [
             CURLOPT_URL => $endpoint,
             CURLOPT_RETURNTRANSFER => true,
@@ -22,9 +26,11 @@ final class Curl implements AdapterInterface
                 'Content-Type: application/json',
                 "Api-Key: {$this->apiKey}",
                 'Content-Encoding: GZIP',
+                "x-request-id: $request_id",
             ],
             CURLOPT_POSTFIELDS => gzencode(json_encode($data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)),
         ];
+
 
         curl_setopt_array($ch, $opts);
 
@@ -36,7 +42,7 @@ final class Curl implements AdapterInterface
         curl_close($ch);
 
         if ($data === false || $code < 200 || $code >= 500) {
-            throw new PostException($error);
+            throw new PostException($error, $request_id);
         }
 
         return new PostResult($code, $data);

@@ -32,7 +32,8 @@
         "php": ">=7.4",
         "ext-json": "*",
         "ext-curl": "*",
-        "ext-zlib": "*"
+        "ext-zlib": "*",
+        "ramsey/uuid": "^4.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.4",
