@@ -58,3 +58,4 @@ Main reasons includes:
   });
   ```
 - There are [other SDKs for other languages](https://docs.newrelic.com/docs/telemetry-data-platform/get-started/capabilities/telemetry-sdks-send-custom-telemetry-data-new-relic), this is an unofficial PHP version.
+- Could be used to build a New Relic exporter for the upcoming [OpenTelemetry PHP library](https://github.com/open-telemetry/opentelemetry-php).
