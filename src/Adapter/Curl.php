@@ -19,9 +19,6 @@ final class Curl implements AdapterInterface
         $request_id = Uuid::uuid4()->toString();
         $body = json_encode($data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
 
-
-        var_dump($body);
-
         $opts = [
             CURLOPT_URL => $endpoint,
             CURLOPT_RETURNTRANSFER => true,
