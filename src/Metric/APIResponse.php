@@ -32,7 +32,7 @@ final class APIResponse extends AbstractResponse
         $response = new self($code, $payload);
 
         if (array_key_exists('requestId', $payload)) {
-            $response->id = (string)$payload['requestId'];
+            $response->id = (string) $payload['requestId'];
         }
 
         return $response;

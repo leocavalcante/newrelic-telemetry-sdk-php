@@ -4,5 +4,5 @@ namespace NewRelic\Util;
 
 function current_timestamp(): int
 {
-    return (int)round(microtime(true) * 1000);
+    return (int) round(microtime(true) * 1000);
 }

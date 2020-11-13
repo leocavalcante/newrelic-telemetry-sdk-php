@@ -17,8 +17,11 @@ final class API implements APIInterface
     private string $accountId;
     private array $events;
 
-    public function __construct(string $accountId, AdapterInterface $adapter, array $events = [])
-    {
+    public function __construct(
+        string $accountId,
+        AdapterInterface $adapter,
+        array $events = []
+    ) {
         $this->accountId = $accountId;
         $this->adapter = $adapter;
         $this->events = $events;
@@ -32,7 +35,10 @@ final class API implements APIInterface
 
     public function commit(): APIResponseInterface
     {
-        $result = $this->adapter->post(sprintf(self::ENDPOINT, $this->accountId), $this->events);
+        $result = $this->adapter->post(
+            sprintf(self::ENDPOINT, $this->accountId),
+            $this->events
+        );
         return APIResponse::create($result->getCode(), $result->getPayload());
     }
 }

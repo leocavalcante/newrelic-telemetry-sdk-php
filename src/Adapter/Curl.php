@@ -22,14 +22,17 @@ final class Curl implements AdapterInterface
                 'Content-Type: application/json',
                 "Api-Key: {$this->apiKey}",
             ],
-            CURLOPT_POSTFIELDS => json_encode($data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE),
+            CURLOPT_POSTFIELDS => json_encode(
+                $data,
+                JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE
+            ),
         ];
 
         curl_setopt_array($ch, $opts);
 
         /** @var string|false $data */
         $data = curl_exec($ch);
-        $code = (int)curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        $code = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
         $error = curl_error($ch) ?: 'Unknown error';
 
         curl_close($ch);

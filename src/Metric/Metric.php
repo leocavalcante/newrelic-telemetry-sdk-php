@@ -19,8 +19,11 @@ abstract class Metric implements DataTypeInterface
      * @param int|null $timestamp
      * @return static
      */
-    public static function create(string $name, $value = null, ?int $timestamp = null): self
-    {
+    public static function create(
+        string $name,
+        $value = null,
+        ?int $timestamp = null
+    ): self {
         return new static($name, $value, $timestamp);
     }
 
@@ -29,8 +32,11 @@ abstract class Metric implements DataTypeInterface
      * @param int|float|SummaryValue|null $value
      * @param int|null $timestamp
      */
-    final public function __construct(string $name, $value = null, ?int $timestamp = null)
-    {
+    final public function __construct(
+        string $name,
+        $value = null,
+        ?int $timestamp = null
+    ) {
         $this->name = $name;
         $this->value = $value;
         $this->timestamp = $timestamp ?? current_timestamp();

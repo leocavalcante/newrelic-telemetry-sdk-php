@@ -5,7 +5,6 @@ namespace NewRelic\Metric;
 use NewRelic\Adapter\AdapterInterface;
 use NewRelic\APIInterface;
 use NewRelic\APIResponseInterface;
-use function NewRelic\Util\current_timestamp;
 
 /**
  * @see https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data/ingest-apis/report-metrics-metric-api
@@ -18,8 +17,11 @@ final class API implements APIInterface
     private array $common;
     private array $metrics;
 
-    public function __construct(AdapterInterface $adapter, array $common = [], array $metrics = [])
-    {
+    public function __construct(
+        AdapterInterface $adapter,
+        array $common = [],
+        array $metrics = []
+    ) {
         $this->adapter = $adapter;
         $this->common = $common;
         $this->metrics = $metrics;
