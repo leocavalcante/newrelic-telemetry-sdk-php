@@ -2,6 +2,9 @@
 
 **Unofficial** PHP library for sending telemetry data to New Relic.
 
+- ⚠️ Heavily under development, but open-sourced seeking for contributions.
+- It **is not** an agent wrapper, it calls the New Relic [Ingest APIs](https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data/ingest-apis).
+
 ```php
 use NewRelic\Adapter;
 use NewRelic\Metric;
@@ -25,4 +28,4 @@ if ($response->isOk()) {
 }
 ```
 
-https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data
+https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data/ingest-apis
