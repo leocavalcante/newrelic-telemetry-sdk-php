@@ -1,10 +1,9 @@
-# New Relic Telemetry SDK for PHP
+<?php declare(strict_types=1);
 
-**Unofficial** PHP library for sending telemetry data to New Relic.
-
-```php
 use NewRelic\Adapter;
 use NewRelic\Metric;
+
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $metric_api = new Metric\API(new Adapter\Curl(getenv('NR_API_KEY')));
 
@@ -15,7 +14,7 @@ $metric_api->setCommon([
     ],
 ]);
 
-$metric_api->send(new Metric\Gauge('memory.heap', 2.3));
+$metric_api->send(new Metric\Gauge('memory.head', 2.3));
 $response = $metric_api->commit();
 
 if ($response->isOk()) {
@@ -23,6 +22,3 @@ if ($response->isOk()) {
 } else {
     echo sprintf("Metric send error: %s\n", $response->getMessage());
 }
-```
-
-https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data
