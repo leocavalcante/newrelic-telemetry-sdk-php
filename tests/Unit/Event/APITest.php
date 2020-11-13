@@ -7,14 +7,17 @@ use NewRelic\Adapter\AdapterInterface;
 use NewRelic\Adapter\HttpResult;
 use NewRelic\Event\API;
 
-it('send evens', function () {
+it('send events', function () {
     $event_data = ['foo' => 'bar'];
 
+    $http_result = Mockery::mock(HttpResult::class);
+    $http_result->expects('getCode')->andReturn(202);
+    $http_result->expects('getPayload')->andReturn(['uuid' => 'xxxx-xxxx-xxxx-xxxx']);
+
     $adapter = Mockery::mock(AdapterInterface::class);
-    $adapter->shouldIgnoreMissing();
-    $adapter->expects('post')
+    $adapter->expects('http')
         ->with('https://insights-collector.newrelic.com/v1/accounts/1234567890/events', [array_merge(['eventType' => 'Test'], $event_data)])
-        ->andReturn(new HttpResult(202, '{"uuid": "xxxx-xxxx-xxxx-xxxx"}'));
+        ->andReturn($http_result);
 
     $api = new API('1234567890', $adapter);
     $api->send('Test', $event_data);

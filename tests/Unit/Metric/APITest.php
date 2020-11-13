@@ -11,11 +11,26 @@ use NewRelic\Metric\Gauge;
 it('send metrics', function (): void {
     $metric = new Gauge('test', 123, 1234567890);
 
+    $http_result = Mockery::mock(HttpResult::class);
+    $http_result->expects('getCode')->andReturn(202);
+    $http_result->expects('getPayload')->andReturn(['requestId' => 'xxxx-xxxx-xxxx-xxxx']);
+
     $adapter = Mockery::mock(AdapterInterface::class);
-    $adapter->shouldIgnoreMissing();
-    $adapter->expects('post')
-        ->with('https://metric-api.newrelic.com/metric/v1', [['metrics' => [$metric]]])
-        ->andReturn(new HttpResult(202, '{"requestId": "xxxx-xxxx-xxxx-xxxx"}'));
+    $adapter
+        ->expects('http')
+        ->with('https://metric-api.newrelic.com/metric/v1', [
+            [
+                'common' => [
+                    'attributes' => [
+                        'telemetry.sdk.name' => 'newrelic-contrib',
+                        'telemetry.sdk.language' => 'php',
+                        'telemetry.sdk.version' => '0.1.0',
+                    ],
+                ],
+                'metrics' => [$metric],
+            ],
+        ])
+        ->andReturn($http_result);
 
     $api = new API($adapter);
     $api->send($metric);
