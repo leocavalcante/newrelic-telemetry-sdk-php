@@ -11,25 +11,29 @@ abstract class Metric implements DataTypeInterface
     private $value;
     /** @var array<string|int|float> */
     private array $attrs = [];
+    private int $timestamp;
 
     /**
      * @param string $name
      * @param int|float|SummaryValue|null $value
+     * @param int|null $timestamp
      * @return static
      */
-    public static function create(string $name, $value = null): self
+    public static function create(string $name, $value = null, ?int $timestamp = null): self
     {
-        return new static($name, $value);
+        return new static($name, $value, $timestamp);
     }
 
     /**
      * @param string $name
      * @param int|float|SummaryValue|null $value
+     * @param int|null $timestamp
      */
-    public final function __construct(string $name, $value = null)
+    final public function __construct(string $name, $value = null, ?int $timestamp = null)
     {
         $this->name = $name;
         $this->value = $value;
+        $this->timestamp = $timestamp ?? current_timestamp();
     }
 
     /**
@@ -39,6 +43,12 @@ abstract class Metric implements DataTypeInterface
     public function setValue($value): self
     {
         $this->value = $value;
+        return $this;
+    }
+
+    public function setTimestamp(int $timestamp): self
+    {
+        $this->timestamp = $timestamp;
         return $this;
     }
 
@@ -69,7 +79,7 @@ abstract class Metric implements DataTypeInterface
             'name' => $this->name,
             'type' => $this->getType(),
             'value' => $this->value,
-            'timestamp' => current_timestamp(),
+            'timestamp' => $this->timestamp,
         ];
 
         if (!empty($this->attrs)) {

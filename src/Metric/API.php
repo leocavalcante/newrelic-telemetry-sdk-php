@@ -5,6 +5,7 @@ namespace NewRelic\Metric;
 use NewRelic\Adapter\AdapterInterface;
 use NewRelic\APIInterface;
 use NewRelic\APIResponseInterface;
+use function NewRelic\Util\current_timestamp;
 
 /**
  * @see https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data/ingest-apis/report-metrics-metric-api
@@ -32,9 +33,7 @@ final class API implements APIInterface
 
     public function commit(): APIResponseInterface
     {
-        $data = [
-            'metrics' => $this->metrics,
-        ];
+        $data = ['metrics' => $this->metrics];
 
         if (!empty($this->common)) {
             $data['common'] = $this->common;
