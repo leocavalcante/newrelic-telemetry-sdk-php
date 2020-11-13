@@ -1,0 +1,22 @@
+{
+    "name": "leocavalcante/newrelic-telemetry-sdk",
+    "description": "Unofficial PHP library for sending telemetry data to New Relic",
+    "type": "library",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "leocavalcante",
+            "email": "lc@leocavalcante.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "NewRelic\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.3"
+    }
+}
