@@ -29,3 +29,18 @@ if ($response->isOk()) {
 ```
 
 https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data/ingest-apis
+
+# Why
+
+Main reasons includes:
+- Too many [segfaults](https://www.google.com/search?q=newrelic+segfault) with the regular agent. 
+- The regular agent doesn't play well with Swoole:
+  ```php
+  Co\run(static function () {
+    go(static function () {
+      (new Co\Http\Client('swoole.co.uk'))->get('/');
+    });
+  });
+  ```
+  This extremely simple snippet is enough to throw a segfault.
+- There are other SDKs for other languages, this is an unofficial PHP version.
