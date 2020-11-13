@@ -28,13 +28,16 @@ if ($response->isOk()) {
 }
 ```
 
-https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data/ingest-apis
+## Resources
 
-# Tips
+- https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data/ingest-apis
+- https://github.com/open-telemetry/opentelemetry-specification/tree/master/specification/resource/semantic_conventions
+
+## Tips
 
 - Make sure you are including [service.instance.id](https://github.com/open-telemetry/opentelemetry-specification/blob/master/specification/resource/semantic_conventions/README.md#service) when reporting your traces and/or metrics.
 
-# Why
+## Why
 
 Main reasons includes:
 - Too many [segfaults](https://www.google.com/search?q=newrelic+segfault) with the regular agent. 

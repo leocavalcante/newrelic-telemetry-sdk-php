@@ -27,6 +27,7 @@ final class Curl implements AdapterInterface
                 'Content-Type: application/json',
                 "Api-Key: {$this->apiKey}",
                 'Content-Encoding: GZIP',
+                'User-Agent: NewRelic-PHP-TelemetrySDK',
                 "x-request-id: $request_id",
             ],
             CURLOPT_POSTFIELDS => gzencode($body),

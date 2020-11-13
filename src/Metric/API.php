@@ -19,7 +19,11 @@ final class API implements APIInterface
 
     public function __construct(
         AdapterInterface $adapter,
-        array $common = [],
+        array $common = [
+            'telemetry.sdk.name' => 'newrelic-contrib',
+            'telemetry.sdk.language' => 'php',
+            'telemetry.sdk.version' => '0.1.0',
+        ],
         array $metrics = []
     ) {
         $this->adapter = $adapter;
