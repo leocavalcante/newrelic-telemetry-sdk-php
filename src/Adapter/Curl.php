@@ -17,6 +17,7 @@ final class Curl implements AdapterInterface
     {
         $ch = curl_init();
         $request_id = Uuid::uuid4()->toString();
+        $body = json_encode($data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
 
         $opts = [
             CURLOPT_URL => $endpoint,
@@ -28,9 +29,8 @@ final class Curl implements AdapterInterface
                 'Content-Encoding: GZIP',
                 "x-request-id: $request_id",
             ],
-            CURLOPT_POSTFIELDS => gzencode(json_encode($data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)),
+            CURLOPT_POSTFIELDS => gzencode($body),
         ];
-
 
         curl_setopt_array($ch, $opts);
 

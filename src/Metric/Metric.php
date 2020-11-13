@@ -4,24 +4,32 @@ namespace NewRelic\Metric;
 
 use function NewRelic\Util\current_timestamp;
 
+/**
+ * @template T
+ */
 abstract class Metric implements DataTypeInterface
 {
     private string $name;
-    /** @var int|float|SummaryValue|null */
-    private $value;
+    /**
+     * @var mixed
+     * @psalm-var T
+     */
+    protected $value;
     /** @var array<string|int|float> */
     private array $attrs = [];
     private int $timestamp;
 
     /**
+     * @template ST
      * @param string $name
-     * @param int|float|SummaryValue|null $value
+     * @param mixed $value
+     * @psalm-param ST $value
      * @param int|null $timestamp
      * @return static
      */
     public static function create(
         string $name,
-        $value = null,
+        $value,
         ?int $timestamp = null
     ): self {
         return new static($name, $value, $timestamp);
@@ -29,12 +37,13 @@ abstract class Metric implements DataTypeInterface
 
     /**
      * @param string $name
-     * @param int|float|SummaryValue|null $value
+     * @param mixed $value
+     * @psalm-param T $value
      * @param int|null $timestamp
      */
     final public function __construct(
         string $name,
-        $value = null,
+        $value,
         ?int $timestamp = null
     ) {
         $this->name = $name;
@@ -43,7 +52,8 @@ abstract class Metric implements DataTypeInterface
     }
 
     /**
-     * @param int|float|SummaryValue $value
+     * @param mixed $value
+     * @psalm-param T $value
      * @return $this
      */
     public function setValue($value): self
@@ -90,6 +100,10 @@ abstract class Metric implements DataTypeInterface
 
         if (!empty($this->attrs)) {
             $metric['attributes'] = $this->attrs;
+        }
+
+        if ($this instanceof IntervalInterface) {
+            $metric['interval.ms'] = $this->getIntervalMs();
         }
 
         return $metric;

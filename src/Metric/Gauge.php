@@ -2,6 +2,9 @@
 
 namespace NewRelic\Metric;
 
+/**
+ * @extends Metric<int|float>
+ */
 final class Gauge extends Metric
 {
     private const TYPE = 'gauge';
