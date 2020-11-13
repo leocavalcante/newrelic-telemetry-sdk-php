@@ -29,7 +29,7 @@ final class Curl implements AdapterInterface
 
         $data = curl_exec($ch);
         $code = (int)curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
-        $error = curl_error($ch);
+        $error = curl_error($ch) ?: 'Unknown error';
 
         curl_close($ch);
 
