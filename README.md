@@ -12,6 +12,12 @@
 - ⚠️ Heavily under development, but open-sourced seeking for contributions.
 - It **is not** an agent wrapper, it calls the New Relic [Ingest APIs](https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data/ingest-apis).
 
+## Usage
+
+### Example
+
+Sending a [Gauge](https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data/understand-data/metric-data-type) metric.
+
 ```php
 use NewRelic\Adapter;
 use NewRelic\Metric;
@@ -29,12 +35,13 @@ if ($response->isOk()) {
 }
 ```
 
-## Resources
+## Companion resources
 
-- https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data/ingest-apis
-- https://github.com/open-telemetry/opentelemetry-specification/tree/master/specification/resource/semantic_conventions
+- [New Relic data dictionary](https://docs.newrelic.com/attribute-dictionary)
+- [Ingest APIs](https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data/ingest-apis)
+- [OpenTelemetry Spec](https://github.com/open-telemetry/opentelemetry-specification/tree/master/specification/resource/semantic_conventions)
 
-## Tips
+### Tips
 
 - Make sure you are including [service.instance.id](https://github.com/open-telemetry/opentelemetry-specification/blob/master/specification/resource/semantic_conventions/README.md#service) when reporting your traces and/or metrics.
 
@@ -42,7 +49,7 @@ if ($response->isOk()) {
 
 Main reasons includes:
 - Too many [segfaults](https://www.google.com/search?q=newrelic+segfault) with the regular agent. 
-- The regular agent doesn't play well with Swoole:
+- Even for simple use cases the regular agent doesn't play well with Swoole. This small snippet is enough to throw a segfault:
   ```php
   Co\run(static function () {
     go(static function () {
@@ -50,5 +57,4 @@ Main reasons includes:
     });
   });
   ```
-  This extremely simple snippet is enough to throw a segfault.
-- There are other SDKs for other languages, this is an unofficial PHP version.
+- There are [other SDKs for other languages](https://docs.newrelic.com/docs/telemetry-data-platform/get-started/capabilities/telemetry-sdks-send-custom-telemetry-data-new-relic), this is an unofficial PHP version.
