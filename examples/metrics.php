@@ -9,11 +9,7 @@ $metric_api = new Metric\API(new Adapter\Curl(getenv('NR_API_KEY')));
 
 $metric_api->setCommon([
     'attributes' => [
-        'appName' => 'PHP-SDK',
-        'serviceName' => 'PHP-SDK',
-        'entityName' => 'PHP-SDK',
-        'entity.guid' => 'abc123',
-        'host.name' => 'php-sdk.newrelic.dev',
+        'service.name' => 'PHP-SDK',
     ],
 ]);
 

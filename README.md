@@ -30,6 +30,10 @@ if ($response->isOk()) {
 
 https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data/ingest-apis
 
+# Tips
+
+- Make sure you are including [service.instance.id](https://github.com/open-telemetry/opentelemetry-specification/blob/master/specification/resource/semantic_conventions/README.md#service) when reporting your traces and/or metrics.
+
 # Why
 
 Main reasons includes:
