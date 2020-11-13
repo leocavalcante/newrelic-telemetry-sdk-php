@@ -1,4 +1,4 @@
-# New Relic Telemetry SDK for PHP
+# New Relic Telemetry SDK for PHP ![CI](https://github.com/leocavalcante/newrelic-telemetry-sdk-php/workflows/CI/badge.svg?branch=main)
 
 **Unofficial** PHP library for sending telemetry data to New Relic.
 
