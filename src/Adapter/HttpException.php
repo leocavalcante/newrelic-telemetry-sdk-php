@@ -2,7 +2,7 @@
 
 namespace NewRelic\Adapter;
 
-final class PostException extends \Exception
+final class HttpException extends \Exception
 {
     private string $requestId;
 

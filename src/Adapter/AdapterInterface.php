@@ -4,5 +4,5 @@ namespace NewRelic\Adapter;
 
 interface AdapterInterface
 {
-    public function post(string $endpoint, array $data): PostResult;
+    public function http(string $endpoint, array $data): HttpResult;
 }

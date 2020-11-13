@@ -2,7 +2,7 @@
 
 namespace NewRelic\Adapter;
 
-class PostResult
+class HttpResult
 {
     private int $code;
     private string $data;

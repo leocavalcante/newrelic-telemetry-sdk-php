@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace NewRelic\Metric;
+namespace NewRelic\Trace;
 
 use NewRelic\Adapter\AdapterInterface;
 use NewRelic\APIInterface;
@@ -9,29 +9,26 @@ use NewRelic\Common\CommonAttrsInterface;
 use NewRelic\Common\TelemetrySdkTrait;
 
 /**
- * @see https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data/ingest-apis/report-metrics-metric-api
+ * @see https://docs.newrelic.com/docs/understand-dependencies/distributed-tracing/trace-api/report-new-relic-format-traces-trace-api
  */
 final class API implements APIInterface, CommonAttrsInterface
 {
     use TelemetrySdkTrait;
 
-    private const ENDPOINT = 'https://metric-api.newrelic.com/metric/v1';
+    private const ENDPOINT = 'https://trace-api.newrelic.com/trace/v1';
     private AdapterInterface $adapter;
-    private array $metrics;
+    private array $spans;
 
-    public function __construct(
-        AdapterInterface $adapter,
-        array $common = [],
-        array $metrics = []
-    ) {
+    public function __construct(AdapterInterface $adapter, array $common = [], array $spans = [])
+    {
         $this->adapter = $adapter;
         $this->commonAttrs = $common;
-        $this->metrics = $metrics;
+        $this->spans = $spans;
     }
 
-    public function send(Metric $metric): self
+    public function span(Span $span): self
     {
-        $this->metrics[] = $metric;
+        $this->spans[] = $span;
         return $this;
     }
 
@@ -41,7 +38,7 @@ final class API implements APIInterface, CommonAttrsInterface
             'common' => [
                 'attributes' => $this->getCommonAttrs(),
             ],
-            'metrics' => $this->metrics,
+            'spans' => $this->spans,
         ];
 
         $result = $this->adapter->http(self::ENDPOINT, [$data]);

@@ -35,7 +35,7 @@ final class API implements APIInterface
 
     public function commit(): APIResponseInterface
     {
-        $result = $this->adapter->post(
+        $result = $this->adapter->http(
             sprintf(self::ENDPOINT, $this->accountId),
             $this->events
         );

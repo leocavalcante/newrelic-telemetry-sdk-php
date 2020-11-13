@@ -4,7 +4,7 @@ namespace NewRelic\Test\Unit\Event;
 
 use Mockery;
 use NewRelic\Adapter\AdapterInterface;
-use NewRelic\Adapter\PostResult;
+use NewRelic\Adapter\HttpResult;
 use NewRelic\Event\API;
 
 it('send evens', function () {
@@ -14,7 +14,7 @@ it('send evens', function () {
     $adapter->shouldIgnoreMissing();
     $adapter->expects('post')
         ->with('https://insights-collector.newrelic.com/v1/accounts/1234567890/events', [array_merge(['eventType' => 'Test'], $event_data)])
-        ->andReturn(new PostResult(202, '{"uuid": "xxxx-xxxx-xxxx-xxxx"}'));
+        ->andReturn(new HttpResult(202, '{"uuid": "xxxx-xxxx-xxxx-xxxx"}'));
 
     $api = new API('1234567890', $adapter);
     $api->send('Test', $event_data);

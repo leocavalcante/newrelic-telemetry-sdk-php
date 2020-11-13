@@ -4,7 +4,7 @@ namespace NewRelic\Test\Unit\Metric;
 
 use Mockery;
 use NewRelic\Adapter\AdapterInterface;
-use NewRelic\Adapter\PostResult;
+use NewRelic\Adapter\HttpResult;
 use NewRelic\Metric\API;
 use NewRelic\Metric\Gauge;
 
@@ -15,7 +15,7 @@ it('send metrics', function (): void {
     $adapter->shouldIgnoreMissing();
     $adapter->expects('post')
         ->with('https://metric-api.newrelic.com/metric/v1', [['metrics' => [$metric]]])
-        ->andReturn(new PostResult(202, '{"requestId": "xxxx-xxxx-xxxx-xxxx"}'));
+        ->andReturn(new HttpResult(202, '{"requestId": "xxxx-xxxx-xxxx-xxxx"}'));
 
     $api = new API($adapter);
     $api->send($metric);
