@@ -46,6 +46,8 @@ final class API implements APIInterface, CommonAttrsInterface
 
         $result = $this->adapter->http(self::ENDPOINT, [$data]);
 
+        $this->metrics = [];
+
         return APIResponse::create($result->getCode(), $result->getPayload());
     }
 }
