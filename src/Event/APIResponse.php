@@ -8,6 +8,7 @@ use NewRelic\APIResponseInterface;
 final class APIResponse extends AbstractResponse
 {
     protected array $messages = [
+        200 => 'Success.',
         400 => 'Missing or invalid content length: Unable to process empty request.',
         403 => 'Missing or invalid API key: Invalid Insert key, or the account does not have access to Insights. Register a valid Insert key.',
         408 => 'Request timed out: Request took too long to process.',

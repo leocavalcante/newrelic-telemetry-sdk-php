@@ -9,7 +9,7 @@ $account_id = getenv('NR_ACCOUNT_ID');
 $adapter = new Adapter\Curl(getenv('NR_API_KEY'));
 
 $event_api = new Event\API($account_id, $adapter);
-$event_api->send('Purchase', ['account' => 3, 'amount' => 259.54]);
+$event_api->send('Transaction', ['appName' => 'T TEST', 'account' => 3, 'amount' => 259.54, 'appId' => 'MjkxNDAwNXxFWFR8U0VSVklDRXwyMDAxNjYxMDI4ODU0MTk5NDUy']);
 $response = $event_api->commit();
 
 if ($response->isOk()) {
