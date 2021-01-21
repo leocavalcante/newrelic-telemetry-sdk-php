@@ -25,8 +25,7 @@ abstract class APIResponse implements APIResponseInterface
             return $this->messages['5xx'];
         }
 
-        return $this->messages[$this->code] ??
-            sprintf(self::DEFAULT_MESSAGE, $this->code);
+        return $this->messages[$this->code] ?? sprintf(self::DEFAULT_MESSAGE, $this->code);
     }
 
     public function isOk(): bool
