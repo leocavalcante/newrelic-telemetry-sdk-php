@@ -39,6 +39,7 @@
         "phpunit/phpunit": "^9.4",
         "pestphp/pest": "^0.3.12",
         "vimeo/psalm": "^4.1",
-        "mockery/mockery": "^1.4"
+        "mockery/mockery": "^1.4",
+        "swoole/ide-helper": "^4.6"
     }
 }
