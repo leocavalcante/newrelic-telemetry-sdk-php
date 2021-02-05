@@ -32,9 +32,9 @@ final class Swoole implements AdapterInterface
         ]);
 
         if (!$client->post($path, gzencode($body))) {
-            throw new HttpException($client->errMsg, $request_id);
+            throw new HttpException((string) $client->errMsg, $request_id);
         }
 
-        return new HttpResult($client->getStatusCode(), $client->getBody());
+        return new HttpResult((int) $client->getStatusCode(), (string) $client->getBody());
     }
 }
