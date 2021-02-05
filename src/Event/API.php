@@ -9,7 +9,7 @@ use NewRelic\APIResponseInterface;
 /**
  * @see https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data/ingest-apis/use-event-api-report-custom-events
  */
-final class API implements APIInterface
+class API implements APIInterface
 {
     private const ENDPOINT = 'https://insights-collector.newrelic.com/v1/accounts/%s/events';
 

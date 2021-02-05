@@ -11,7 +11,7 @@ use NewRelic\Common\TelemetrySdkTrait;
 /**
  * @see https://docs.newrelic.com/docs/telemetry-data-platform/ingest-manage-data/ingest-apis/report-metrics-metric-api
  */
-final class API implements APIInterface, CommonAttrsInterface
+class API implements APIInterface, CommonAttrsInterface
 {
     use TelemetrySdkTrait;
 

@@ -11,7 +11,7 @@ use NewRelic\Common\TelemetrySdkTrait;
 /**
  * @see https://docs.newrelic.com/docs/understand-dependencies/distributed-tracing/trace-api/report-new-relic-format-traces-trace-api
  */
-final class API implements APIInterface, CommonAttrsInterface
+class API implements APIInterface, CommonAttrsInterface
 {
     use TelemetrySdkTrait;
 
