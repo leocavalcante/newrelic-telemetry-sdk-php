@@ -26,6 +26,7 @@ final class Curl implements AdapterInterface
             CURLOPT_HTTPHEADER => [
                 'Content-Type: application/json',
                 "Api-Key: {$this->apiKey}",
+                "X-Insert-Key: {$this->apiKey}",
                 'Content-Encoding: GZIP',
                 'User-Agent: NewRelic-PHP-TelemetrySDK',
                 "x-request-id: $request_id",
