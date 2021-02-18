@@ -7,6 +7,9 @@ use NewRelic\APIResponseInterface;
 
 final class APIResponse extends AbstractResponse
 {
+    /**
+     * @var array<array-key, string>
+     */
     protected array $messages = [
         200 => 'Success.',
         400 => 'Missing or invalid content length: Unable to process empty request.',

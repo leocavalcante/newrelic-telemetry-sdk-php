@@ -6,6 +6,9 @@ use NewRelic\APIResponse as AbstractResponse;
 
 final class APIResponse extends AbstractResponse
 {
+    /**
+     * @var array<array-key, string>
+     */
     protected array $messages = [
         202 => 'Data accepted.',
         400 => 'The structure of the request was invalid. Errors with query parameters, etc.',
