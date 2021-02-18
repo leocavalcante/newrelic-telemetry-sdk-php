@@ -16,20 +16,30 @@ class API implements APIInterface
     private AdapterInterface $adapter;
     private string $accountId;
     private array $events;
+    /** @var array<string, mixed> */
+    private array $commonEventData;
 
+    /**
+     * @param string $accountId
+     * @param AdapterInterface $adapter
+     * @param array $events
+     * @param array<string, mixed> $commonEventData
+     */
     public function __construct(
         string $accountId,
         AdapterInterface $adapter,
-        array $events = []
+        array $events = [],
+        array $commonEventData = []
     ) {
         $this->accountId = $accountId;
         $this->adapter = $adapter;
         $this->events = $events;
+        $this->commonEventData = $commonEventData;
     }
 
     public function send(string $eventType, array $eventData = []): self
     {
-        $this->events[] = array_merge(['eventType' => $eventType], $eventData);
+        $this->events[] = array_merge(['eventType' => $eventType], array_merge($this->getCommonEventData(), $eventData));
         return $this;
     }
 
@@ -40,5 +50,21 @@ class API implements APIInterface
             $this->events
         );
         return APIResponse::create($result->getCode(), $result->getPayload());
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getCommonEventData(): array
+    {
+        return $this->commonEventData;
+    }
+
+    /**
+     * @param array<string, mixed> $commonEventData
+     */
+    public function setCommonEventData(array $commonEventData): void
+    {
+        $this->commonEventData = $commonEventData;
     }
 }
